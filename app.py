@@ -32,12 +32,13 @@ col1, col2 = st.columns(2)
 
 with col1:
     uploaded_file = st.file_uploader("Upload Image", type=["jpg", "jpeg", "png"])
-    st.image(uploaded_file, use_column_width=True)
+    if uploaded_file is not None:
+        st.image(uploaded_file, use_column_width=True)
 
 with col2:
     question = st.text_input("Question")
 
-    if uploaded_file and question is not None:
+    if uploaded_file is not None and question is not None:
         if st.button("Ask Question"):
             image = Image.open(uploaded_file)
             image_byte_array = BytesIO()
